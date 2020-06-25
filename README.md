@@ -155,3 +155,5 @@
 
 ##Association
 - belongs_to_active_hash :prefecture
+
+変更確認
