@@ -1,4 +1,51 @@
-##usersテーブル
+# READ ME
+This README would normally document whatever steps are necessary to get the application up and running.
+
+Things you may want to cover:
+
+Ruby version
+
+System dependencies
+
+Configuration
+
+Database creation
+
+Database initialization
+
+How to run the test suite
+
+Services (job queues, cache servers, search engines, etc.)
+
+Deployment instructions
+
+...
+
+# 初回起動手順
+`
+git clone https://github.com/john03191/fleamarket_76_john.git
+cd fleamarket_76_john
+bundle
+rails db:create
+rails db:migrate
+rails db:seed
+rails s
+
+# 購入者用アカウント
+# メールアドレス: buyer@gmail.com
+# パスワード: 9876Ssd
+# > 購入用カード情報
+# 番号： 4242424242424242
+# 期限： 1/26
+# セキュリティコード：123
+
+# 出品者用アカウント
+# メールアドレス名:: seller@gmail.com
+# パスワード: 1234Ssd
+`
+
+
+## usersテーブル
 |Column|Type|Options|
 |------|----|-------|
 |nickname|string|	
@@ -14,14 +61,14 @@
 |icon|text|	
 |text|text|null:false|
 
-##Association
+## Association
 - has_one:address, dependent: :destroy
 - has_many:messages, dependent:  :destroy
 - has_many:items, dependent: :destroy
 - has_many:comments, dependent: :destroy
 - has_many:likes, dependent: :destroy
 
-##addressテーブル
+## addressテーブル
 |Column|Type|Options|
 |------|----|-------|
 |first_name|string|null: false|
@@ -36,19 +83,19 @@
 |telephone|string|	
 |user_id|integer|null:false,foreign_key:true|
 
-##Association
+## Association
 - belongs_to:user
 
-##likesテーブル
+## likesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |item_id|integer|null:false,foreign_key:true|
 |user_id|integer|null:false,foreign_key:true|
 
-##Association
+## Association
 - belongs_to:item belongs_to:user
 
-##itemsテーブル
+## itemsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false|
@@ -66,41 +113,41 @@
 |prefecture_id|integer|null:false|
 |sale_status|string|null:false|
 
-##Association
+## Association
 - belongs_to:user belongs_to:category, dependent: :destroy 
 - has_many:item_images, dependent: :destroy
 - has_many:messages, dependent: :destroy belongs_to:bland, dependent: :destroy 
 - has_many:likes, dependent: :destroy has_many:comments, dependent: :destroy
 
-##categoriesテーブル
+## categoriesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false|
 |ancestry|string|null:false|
 
-##Association
+## Association
 - has_many:items
 
-##item_imagesテーブル
+## item_imagesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |image|text|	
 |item_id|integer|null:false,foreign_key:true|
 
-##Association
+## Association
 - belongs_to:item
 
-##commentsテーブル
+## commentsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |text|text|null:false|
 |item_id|integer|null:false,foreign_key:true|
 |user_id|integer|null:false,foreign_key:true|
 
-##Association
+## Association
 - belongs_to:item belongs_to:user
 
-##messagesテーブル
+## messagesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |text|text|null:false|
@@ -108,52 +155,50 @@
 |buyer_id|integer|null:false,foreign_key:true|
 |seller_id|integer|null:false,foreign_key:true|
 
-##Association
+## Association
 - belongs_to:item belongs_to:user
 
-##brandsテーブル
+## brandsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false|
 
-##Association
+## Association
 - has_many:items has_many:genres,through: :brands_genres
 - has_many:brands_genres
 
-##brands_genresテーブル
+## brands_genresテーブル
 |Column|Type|Options|
 |------|----|-------|
 |brand_id|integer|null:false,foreign_key:true|
 |genre_id|integer|null:false,foreign_key:true|
 
-##Association
+## Association
 - belongs_to:brand belongs_to:genre
 
-##genresテーブル
+## genresテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false|
 
-##Association
+## Association
 - has_many:brands,through: :brands_genres has_many:brands_genres
 
-##cardsテーブル
+## cardsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null:false|
 |customer_id|integer|null:false|
 |card_id|integer|null:false|
 
-##Association
+## Association
 - belongs_to :user
 
-##residencesテーブル
+## residencesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |prefecture_id|integer|null:false|
 |city|text|null:false|
 
-##Association
+## Association
 - belongs_to_active_hash :prefecture
-
-変更確認
